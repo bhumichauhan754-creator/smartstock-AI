@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Details | SmartStock AI</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<main class="container py-4">
+    <nav class="page-nav">
+        <a href="/">Dashboard</a>
+        <a href="/products">Products</a>
+        <a href="/reports">Reports</a>
+        <button data-logout class="btn btn-sm btn-outline-secondary">Log out</button>
+    </nav>
+    <div id="productMessage" class="alert alert-danger d-none"></div>
+    <section class="content-card p-4 mb-4">
+        <p class="eyebrow mb-2">Product details</p>
+        <h1 id="productName" class="page-title">Loading...</h1>
+        <div class="row g-3">
+            <div class="col-md-4"><span class="summary-label">Quantity</span><p id="productQuantity" class="summary-value">--</p></div>
+            <div class="col-md-4"><span class="summary-label">Unit price</span><p id="productPrice" class="summary-value">--</p></div>
+            <div class="col-md-4"><span class="summary-label">Rating</span><p id="productRating" class="summary-value">--</p></div>
+        </div>
+    </section>
+    <section class="content-card p-4 mb-4">
+        <h2 class="section-title">Write a review</h2>
+        <form id="reviewForm">
+            <label class="form-label" for="reviewRating">Rating</label>
+            <select id="reviewRating" class="form-select mb-3" required>
+                <option value="5">5 - Excellent</option>
+                <option value="4">4 - Good</option>
+                <option value="3">3 - Average</option>
+                <option value="2">2 - Poor</option>
+                <option value="1">1 - Very poor</option>
+            </select>
+            <label class="form-label" for="reviewComment">Comment</label>
+            <textarea id="reviewComment" class="form-control mb-3" rows="4" maxlength="1000" required></textarea>
+            <button class="btn btn-primary" type="submit">Publish review</button>
+        </form>
+    </section>
+    <section class="content-card p-4">
+        <h2 class="section-title">Customer reviews</h2>
+        <div id="reviewList" class="review-list">Loading reviews...</div>
+    </section>
+</main>
+<script src="/static/reviews.js"></script>
+</body>
+</html>
