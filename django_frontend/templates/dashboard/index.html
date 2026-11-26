@@ -182,7 +182,7 @@
                 <section class="page-heading">
                     <div>
                         <p class="date-label">{{ today|date:"l, j F Y"|upper }}</p>
-                        <h1>Good morning, {{ request.user.first_name|default:request.user.username }} <span aria-hidden="true">✦</span></h1>
+                        <h1>{{ greeting }}, {{ request.user.first_name|default:request.user.username }} <span aria-hidden="true">✦</span></h1>
                         <p class="page-subtitle">Here’s what’s happening with your inventory today.</p>
                     </div>
                     <a class="primary-button" href="/products/add/">

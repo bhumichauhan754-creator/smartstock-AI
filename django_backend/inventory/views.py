@@ -82,7 +82,15 @@ def dashboard_view(request: HttpRequest) -> HttpResponse:
         total=Sum(F("quantity") * F("unit_cost")),
     )["total"] or Decimal("0")
 
-    today = timezone.localdate()
+    local_now = timezone.localtime()
+    today = local_now.date()
+    greeting = (
+        "Good morning"
+        if local_now.hour < 12
+        else "Good afternoon"
+        if local_now.hour < 18
+        else "Good evening"
+    )
     month_index = today.year * 12 + today.month - 1
     month_starts = [
         date((month_index + offset) // 12, (month_index + offset) % 12 + 1, 1)
@@ -193,6 +201,7 @@ def dashboard_view(request: HttpRequest) -> HttpResponse:
             "profile": profile,
             "user_role": profile.get_role_display(),
             "today": today,
+            "greeting": greeting,
             "total_products": products.count(),
             "total_stock": stock_total,
             "low_stock_products": products.filter(

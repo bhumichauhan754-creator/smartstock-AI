@@ -1,11 +1,13 @@
 """Product catalog CRUD tests for authenticated workspaces."""
 
-from datetime import date
+from datetime import date, datetime, timezone as datetime_timezone
+from unittest.mock import patch
 
 from django.contrib.auth import get_user_model
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
 
 from accounts.models import UserProfile, Workspace
 from inventory.models import (
@@ -368,6 +370,35 @@ class WorkspaceApplicationTests(TestCase):
         )
         self.assertEqual(empty_category["quantity"], 0)
         self.assertEqual(empty_category["percentage"], 0)
+
+    def test_dashboard_greeting_and_date_follow_local_time(self) -> None:
+        cases = (
+            (
+                datetime(2026, 11, 25, 18, 30, tzinfo=datetime_timezone.utc),
+                "Good morning",
+                date(2026, 11, 26),
+            ),
+            (
+                datetime(2026, 11, 26, 6, 30, tzinfo=datetime_timezone.utc),
+                "Good afternoon",
+                date(2026, 11, 26),
+            ),
+            (
+                datetime(2026, 11, 26, 12, 30, tzinfo=datetime_timezone.utc),
+                "Good evening",
+                date(2026, 11, 26),
+            ),
+        )
+
+        with timezone.override("Asia/Kolkata"):
+            for moment, expected_greeting, expected_date in cases:
+                with self.subTest(greeting=expected_greeting):
+                    with patch("django.utils.timezone.now", return_value=moment):
+                        response = self.client.get(reverse("dashboard"))
+
+                    self.assertEqual(response.context["greeting"], expected_greeting)
+                    self.assertEqual(response.context["today"], expected_date)
+                    self.assertContains(response, f"{expected_greeting}, Bhumi")
 
     def test_stock_receipt_increases_quantity_and_records_audit_event(self) -> None:
         response = self.client.post(
