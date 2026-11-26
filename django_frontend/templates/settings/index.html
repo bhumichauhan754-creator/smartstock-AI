@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f8fc">
+    <title>Settings | SmartStock AI</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/settings.css">
+</head>
+<body data-demo="{{ demo|yesno:'true,false' }}">
+    <div class="dashboard-shell">
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+            <a class="brand" href="/dashboard/" aria-label="SmartStock AI dashboard">
+                <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M5 10.5 16 5l11 5.5v11L16 27 5 21.5v-11Z" stroke="currentColor" stroke-width="2"/><path d="m5.5 10.8 10.5 5.4 10.5-5.4M16 16.5V27" stroke="currentColor" stroke-width="2"/></svg></span>
+                <span>SmartStock <span class="brand-light">AI</span></span>
+            </a>
+            <div class="workspace-switcher"><span class="workspace-avatar">{{ workspace.name|first|upper }}</span><span class="workspace-copy"><strong id="sidebarWorkspaceName">{{ workspace.name }}</strong><small id="sidebarTeamName">{{ workspace.team_name }}</small></span></div>
+            <nav class="side-nav">
+                <span class="nav-caption">WORKSPACE</span>
+                <a class="nav-link" href="/dashboard/"><span aria-hidden="true">▦</span><span>Dashboard</span></a>
+                <a class="nav-link" href="/products/"><span aria-hidden="true">◇</span><span>Products</span></a>
+                <a class="nav-link" href="/categories/"><span aria-hidden="true">▧</span><span>Categories</span></a>
+                <span class="nav-caption nav-caption-spaced">OPERATIONS</span>
+                <a class="nav-link" href="/stock/in/"><span aria-hidden="true">↑</span><span>Stock In</span></a>
+                <a class="nav-link" href="/stock/out/"><span aria-hidden="true">↓</span><span>Stock Out</span></a>
+                <a class="nav-link" href="/purchases/"><span aria-hidden="true">▱</span><span>Purchases</span></a>
+                <a class="nav-link" href="/sales/"><span aria-hidden="true">↗</span><span>Sales</span></a>
+                <span class="nav-caption nav-caption-spaced">DIRECTORY</span>
+                <a class="nav-link" href="/suppliers/"><span aria-hidden="true">♧</span><span>Suppliers</span></a>
+                <a class="nav-link" href="/customers/"><span aria-hidden="true">♙</span><span>Customers</span></a>
+                <a class="nav-link" href="/reports/"><span aria-hidden="true">▤</span><span>Reports</span></a>
+                <a class="nav-link" href="/audit/"><span aria-hidden="true">◷</span><span>Audit History</span></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a class="nav-link active" href="/settings/" aria-current="page"><span aria-hidden="true">⚙</span><span>Settings</span></a>
+                <div class="sidebar-user"><span class="user-avatar">{{ request.user.first_name|default:request.user.username|first|upper }}</span><span class="user-copy"><strong>{{ request.user.get_full_name|default:request.user.username }}</strong><small>{{ user_role }}</small></span><a class="user-menu-link" href="/profile/" aria-label="Open user profile"><span aria-hidden="true">›</span></a></div>
+            </div>
+        </aside>
+        <button class="sidebar-scrim" id="sidebarScrim" type="button" aria-label="Close navigation"></button>
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="icon-button sidebar-toggle" id="sidebarToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
+                    <div class="breadcrumb"><span>Workspace</span><span class="breadcrumb-divider">/</span><strong>Settings</strong></div>
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-button notification-button" id="notificationButton" type="button" aria-label="Notifications" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="notification-dot"></span></button>
+                    <a class="topbar-avatar" href="/profile/" aria-label="Your profile">{{ request.user.first_name|default:request.user.username|first|upper }}</a>
+                    <div class="notification-popover" id="notificationPopover" role="status" hidden><strong>You're all caught up</strong><span>No new notifications right now.</span></div>
+                </div>
+            </header>
+
+            <div class="page-content settings-content">
+                <section class="page-heading settings-heading">
+                    <div><p class="date-label">WORKSPACE CONTROL</p><h1>Settings</h1><p class="page-subtitle">Configure workspace details and the updates you want to receive.</p></div>
+                </section>
+
+                <div class="settings-notice"><span aria-hidden="true">i</span><p>Workspace details and notification preferences are saved to your account.</p></div>
+                <p class="settings-feedback{% if server_error %} is-visible is-error{% endif %}" id="settingsFeedback" role="status" aria-live="polite">{{ server_error }}</p>
+                <p class="settings-storage-warning" id="settingsStorageWarning" role="alert" hidden></p>
+
+                <div class="settings-layout">
+                    <form class="settings-form" id="settingsForm" method="post" action="/settings/" data-demo="{{ demo|yesno:'true,false' }}" novalidate>
+                        {% csrf_token %}
+                        <section class="settings-card workspace-settings" aria-labelledby="workspaceSettingsHeading">
+                            <div class="settings-card-heading">
+                                <span class="settings-card-icon workspace-settings-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 20V7l8-4 8 4v13M2.5 20h19M8 10h2m4 0h2m-8 4h2m4 0h2m-8 6v-3h4v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                <div><h2 id="workspaceSettingsHeading">Workspace details</h2><p>Basic information used to identify your workspace.</p></div>
+                            </div>
+                            <div class="settings-fields">
+                                <div class="settings-field"><label for="workspaceName">Workspace name <span>*</span></label><input id="workspaceName" name="workspace_name" type="text" maxlength="60" required value="{{ form.workspace_name.value|default_if_none:'' }}"></div>
+                                <div class="settings-field"><label for="teamName">Team name <span>*</span></label><input id="teamName" name="team_name" type="text" maxlength="60" required value="{{ form.team_name.value|default_if_none:'' }}"></div>
+                                <div class="settings-field"><label for="contactEmail">Contact email <span>*</span></label><input id="contactEmail" name="contact_email" type="email" maxlength="120" autocomplete="email" required value="{{ form.contact_email.value|default_if_none:'' }}"></div>
+                                <div class="settings-field"><label for="workspaceTimezone">Time zone</label><select id="workspaceTimezone" name="timezone">{% for value, label in form.fields.timezone.choices %}<option value="{{ value }}"{% if form.timezone.value == value %} selected{% endif %}>{{ label }}</option>{% endfor %}</select></div>
+                            </div>
+                        </section>
+
+                        <section class="settings-card notification-settings" aria-labelledby="notificationSettingsHeading">
+                            <div class="settings-card-heading">
+                                <span class="settings-card-icon notification-settings-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                                <div><h2 id="notificationSettingsHeading">Notifications</h2><p>Choose which sample updates are enabled for this workspace.</p></div>
+                            </div>
+                            <div class="notification-options">
+                                <label class="notification-option" for="lowStockNotifications">
+                                    <span class="notification-option-copy"><strong>Low stock alerts</strong><small>Be notified when products reach their reorder level.</small></span>
+                                    <input id="lowStockNotifications" name="low_stock_notifications" type="checkbox"{% if form.low_stock_notifications.value %} checked{% endif %}>
+                                    <span class="settings-switch" aria-hidden="true"></span>
+                                </label>
+                                <label class="notification-option" for="purchaseNotifications">
+                                    <span class="notification-option-copy"><strong>Purchase updates</strong><small>Receive updates when a purchase order changes status.</small></span>
+                                    <input id="purchaseNotifications" name="purchase_notifications" type="checkbox"{% if form.purchase_notifications.value %} checked{% endif %}>
+                                    <span class="settings-switch" aria-hidden="true"></span>
+                                </label>
+                                <label class="notification-option" for="salesNotifications">
+                                    <span class="notification-option-copy"><strong>Sales and invoice activity</strong><small>Get updates for new invoices and payment changes.</small></span>
+                                    <input id="salesNotifications" name="sales_notifications" type="checkbox"{% if form.sales_notifications.value %} checked{% endif %}>
+                                    <span class="settings-switch" aria-hidden="true"></span>
+                                </label>
+                                <label class="notification-option" for="weeklySummary">
+                                    <span class="notification-option-copy"><strong>Weekly inventory summary</strong><small>Receive a weekly email with stock and activity highlights.</small></span>
+                                    <input id="weeklySummary" name="weekly_summary" type="checkbox"{% if form.weekly_summary.value %} checked{% endif %}>
+                                    <span class="settings-switch" aria-hidden="true"></span>
+                                </label>
+                            </div>
+                        </section>
+
+                        <div class="settings-form-footer">
+                            <span class="settings-save-note" id="settingsSaveNote">Changes are saved to the workspace.</span>
+                            <div class="settings-actions">
+                                {% if demo %}<button class="settings-restore-button" id="restoreDefaultsButton" type="button">Restore defaults</button>{% endif %}
+                                <button class="settings-secondary-button" id="discardSettingsButton" type="button">Discard changes</button>
+                                <button class="primary-button settings-save-button" type="submit">Save settings</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <aside class="settings-aside" aria-label="Account and support information">
+                        <section class="settings-card account-summary-card">
+                            <div class="settings-side-heading"><span class="settings-side-icon account-side-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M4 20v-1.5A4.5 4.5 0 0 1 8.5 14h7a4.5 4.5 0 0 1 4.5 4.5V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><h2>Your account</h2></div>
+                            <div class="settings-account-user"><span class="settings-account-avatar">{{ request.user.first_name|default:request.user.username|first|upper }}</span><span><strong>{{ request.user.get_full_name|default:request.user.username }}</strong><small>{{ user_role }}</small></span></div>
+                            <a class="settings-account-link" href="/profile/">Manage profile <span aria-hidden="true">→</span></a>
+                        </section>
+                        <section class="settings-card security-summary-card">
+                            <div class="settings-side-heading"><span class="settings-side-icon security-side-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><h2>Security</h2></div>
+                            <p>Sign-in, password, and session security will be handled by Django Authentication when the backend is connected.</p>
+                            <a class="settings-account-link" href="/profile/">Review profile details <span aria-hidden="true">→</span></a>
+                        </section>
+                    </aside>
+                </div>
+                <footer class="page-footer">SmartStock AI <span>·</span> Workspace settings</footer>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/settings.js" defer></script>
+</body>
+</html>

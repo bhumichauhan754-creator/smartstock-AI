@@ -1,0 +1,918 @@
+.purchases-content {
+    padding-top: 29px;
+}
+
+.purchases-heading {
+    margin-bottom: 19px;
+}
+
+.purchases-heading .primary-button {
+    gap: 6px;
+}
+
+.purchases-heading .primary-button svg {
+    width: 16px;
+    height: 16px;
+}
+
+.purchase-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 11px;
+    margin-bottom: 14px;
+}
+
+.purchase-stat-card {
+    display: flex;
+    min-width: 0;
+    min-height: 76px;
+    align-items: center;
+    gap: 11px;
+    padding: 12px 13px;
+    border: 1px solid #e8edf4;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.purchase-stat-icon {
+    display: grid;
+    width: 35px;
+    height: 35px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 9px;
+}
+
+.purchase-stat-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.purchase-value-icon {
+    color: #3978c6;
+    background: #eaf3ff;
+}
+
+.purchase-pending-icon {
+    color: #c48835;
+    background: #fff5e3;
+}
+
+.purchase-received-icon {
+    color: #288969;
+    background: #e8f7f0;
+}
+
+.purchase-suppliers-icon {
+    color: #806bbd;
+    background: #f0edfc;
+}
+
+.purchase-stat-card > span:last-child {
+    display: grid;
+    min-width: 0;
+    gap: 3px;
+}
+
+.purchase-stat-card small {
+    color: #8793a5;
+    font-size: 9px;
+}
+
+.purchase-stat-card strong {
+    overflow: hidden;
+    color: #263650;
+    font-family: "Manrope", "Segoe UI", sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.purchase-stat-card .purchase-stat-caption {
+    color: #9aa5b4;
+    font-size: 8px;
+}
+
+.purchase-panel {
+    overflow: hidden;
+    border: 1px solid #e8edf4;
+    border-radius: 11px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(23, 36, 59, 0.02);
+}
+
+.purchase-toolbar {
+    display: flex;
+    min-height: 72px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 14px 17px;
+    border-bottom: 1px solid #edf0f5;
+}
+
+.purchase-toolbar h2 {
+    margin: 0;
+    color: #263650;
+    font-family: "Manrope", "Segoe UI", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.purchase-toolbar p {
+    margin: 5px 0 0;
+    color: #929eae;
+    font-size: 9px;
+}
+
+.purchase-filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.purchase-search,
+.purchase-status-filter {
+    position: relative;
+    display: flex;
+    height: 34px;
+    align-items: center;
+    gap: 7px;
+    padding: 0 9px;
+    border: 1px solid #e5eaf1;
+    border-radius: 7px;
+    background: #fff;
+}
+
+.purchase-search {
+    width: 215px;
+}
+
+.purchase-search svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+    color: #97a3b2;
+}
+
+.purchase-search input {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    color: #34445d;
+    background: transparent;
+    font-size: 9px;
+}
+
+.purchase-search input::placeholder {
+    color: #a1acba;
+}
+
+.purchase-status-filter select {
+    width: 104px;
+    height: 31px;
+    padding: 0 18px 0 2px;
+    appearance: none;
+    border: 0;
+    outline: none;
+    color: #637188;
+    background: transparent;
+    font-size: 9px;
+    cursor: pointer;
+}
+
+.purchase-status-filter > svg {
+    position: absolute;
+    right: 7px;
+    width: 13px;
+    height: 13px;
+    pointer-events: none;
+    color: #8491a4;
+}
+
+.purchase-search:focus-within,
+.purchase-status-filter:focus-within {
+    border-color: #75a5e8;
+    box-shadow: 0 0 0 3px rgba(57, 123, 217, 0.1);
+}
+
+.purchase-storage-warning {
+    margin: 13px 15px;
+    padding: 9px 10px;
+    border-radius: 6px;
+    color: #a43e3e;
+    background: #fceeee;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.purchase-feedback {
+    display: none;
+    margin: 10px 15px 0;
+    padding: 8px 10px;
+    border-radius: 6px;
+    color: #277c61;
+    background: #eff9f4;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.purchase-feedback.is-visible {
+    display: block;
+}
+
+.purchase-feedback.is-error {
+    color: #a43e3e;
+    background: #fceeee;
+}
+
+.purchase-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.purchase-table {
+    width: 100%;
+    min-width: 780px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.purchase-table th {
+    height: 36px;
+    padding: 0 13px;
+    border-bottom: 1px solid #edf0f5;
+    color: #8995a6;
+    background: #fafbfd;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 0.65px;
+}
+
+.purchase-table td {
+    height: 57px;
+    padding: 8px 13px;
+    border-bottom: 1px solid #f0f2f6;
+    color: #66748a;
+    font-size: 9px;
+    white-space: nowrap;
+}
+
+.purchase-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.purchase-order-cell {
+    display: grid;
+    gap: 4px;
+}
+
+.purchase-order-cell strong {
+    color: #346eae;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.purchase-order-cell small {
+    color: #9aa5b4;
+    font-size: 8px;
+}
+
+.purchase-amount {
+    color: #32425b !important;
+    font-weight: 600;
+}
+
+.purchase-status {
+    display: inline-flex;
+    min-height: 21px;
+    align-items: center;
+    gap: 5px;
+    padding: 0 7px;
+    border-radius: 12px;
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.purchase-status i {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.purchase-status.draft {
+    color: #77869a;
+    background: #f0f2f5;
+}
+
+.purchase-status.ordered {
+    color: #b17c29;
+    background: #fff5e3;
+}
+
+.purchase-status.received {
+    color: #278264;
+    background: #eaf7f0;
+}
+
+.purchase-status.cancelled {
+    color: #b6535b;
+    background: #fff0f0;
+}
+
+.purchase-row-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.purchase-row-action {
+    min-height: 27px;
+    padding: 0 7px;
+    border: 1px solid #e4e9f0;
+    border-radius: 6px;
+    color: #66758b;
+    background: #fff;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 130ms ease, border-color 130ms ease, background 130ms ease;
+}
+
+.purchase-row-action:hover {
+    border-color: #c6d8ee;
+    color: #286bc3;
+    background: #f5f9ff;
+}
+
+.purchase-row-action.primary {
+    border-color: #d9e7f7;
+    color: #2e70bd;
+    background: #f6faff;
+}
+
+.purchase-empty {
+    display: grid;
+    min-height: 150px;
+    align-content: center;
+    justify-items: center;
+    gap: 6px;
+    color: #929eae;
+    font-size: 9px;
+}
+
+.purchase-empty strong {
+    color: #506078;
+    font-size: 11px;
+}
+
+.purchase-empty[hidden] {
+    display: none;
+}
+
+.purchase-table-footer {
+    display: flex;
+    min-height: 38px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 15px;
+    border-top: 1px solid #edf0f5;
+    color: #8995a6;
+    font-size: 8px;
+}
+
+.purchase-stock-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 12px;
+    padding: 11px 13px;
+    border: 1px solid #e1eaf5;
+    border-radius: 8px;
+    background: #f8fbff;
+}
+
+.purchase-note-icon {
+    display: grid;
+    width: 17px;
+    height: 17px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 50%;
+    color: #fff;
+    background: #6f9bd2;
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.purchase-stock-note p {
+    margin: 0;
+    color: #75839a;
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+.purchase-stock-note strong {
+    color: #4a5d79;
+}
+
+.purchase-stock-note a {
+    color: #286bc3;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.purchase-stock-note a:hover {
+    text-decoration: underline;
+}
+
+.purchase-dialog,
+.purchase-detail-dialog {
+    width: min(620px, calc(100vw - 28px));
+    max-width: none;
+    max-height: min(88vh, 760px);
+    padding: 0;
+    overflow: auto;
+    border: 1px solid #e6ecf3;
+    border-radius: 14px;
+    color: #17243b;
+    background: #fff;
+    box-shadow: 0 24px 70px rgba(17, 35, 63, 0.22);
+}
+
+.purchase-dialog::backdrop,
+.purchase-detail-dialog::backdrop {
+    background: rgba(15, 31, 52, 0.45);
+    backdrop-filter: blur(2px);
+}
+
+.purchase-dialog-form,
+.purchase-detail-content {
+    padding: 20px;
+}
+
+.purchase-dialog-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.purchase-dialog-icon {
+    display: grid;
+    width: 35px;
+    height: 35px;
+    flex: 0 0 auto;
+    place-items: center;
+    border-radius: 9px;
+    color: #3478d1;
+    background: #eaf3ff;
+}
+
+.purchase-dialog-icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+.purchase-dialog-heading h2 {
+    margin: 1px 0 4px;
+    color: #263650;
+    font-family: "Manrope", "Segoe UI", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.purchase-dialog-heading p {
+    margin: 0;
+    color: #8793a5;
+    font-size: 9px;
+    line-height: 1.5;
+}
+
+.purchase-dialog-close {
+    display: grid;
+    width: 27px;
+    height: 27px;
+    margin: -3px -4px 0 auto;
+    place-items: center;
+    border: 0;
+    border-radius: 6px;
+    color: #8290a3;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.purchase-dialog-close:hover {
+    color: #394a63;
+    background: #f3f6f9;
+}
+
+.purchase-dialog-fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.purchase-dialog-field {
+    min-width: 0;
+}
+
+.purchase-dialog-field label {
+    display: block;
+    margin-bottom: 6px;
+    color: #34445d;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.purchase-dialog-field label > span:first-child {
+    color: #d35d5d;
+}
+
+.purchase-dialog-field .optional-label {
+    margin-left: 4px;
+    color: #99a4b3;
+    font-size: 8px;
+    font-weight: 400;
+}
+
+.purchase-dialog-field input,
+.purchase-dialog-field select,
+.purchase-dialog-field textarea {
+    width: 100%;
+    min-width: 0;
+    min-height: 35px;
+    padding: 0 9px;
+    border: 1px solid #dfe6ef;
+    border-radius: 7px;
+    outline: none;
+    color: #263650;
+    background: #fff;
+    font-size: 9px;
+}
+
+.purchase-dialog-field textarea {
+    min-height: 58px;
+    padding: 8px 9px;
+    resize: vertical;
+}
+
+.purchase-dialog-field input:focus,
+.purchase-dialog-field select:focus,
+.purchase-dialog-field textarea:focus {
+    border-color: #75a5e8;
+    box-shadow: 0 0 0 3px rgba(57, 123, 217, 0.1);
+}
+
+.purchase-line-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 9px;
+    margin: 17px 0 8px;
+}
+
+.purchase-line-heading > div {
+    display: grid;
+    gap: 3px;
+}
+
+.purchase-line-heading strong {
+    color: #34445d;
+    font-size: 9px;
+}
+
+.purchase-line-heading small {
+    color: #929eae;
+    font-size: 8px;
+}
+
+.purchase-add-line {
+    display: inline-flex;
+    min-height: 28px;
+    align-items: center;
+    gap: 4px;
+    padding: 0 8px;
+    border: 1px solid #dce7f5;
+    border-radius: 6px;
+    color: #2c6fc3;
+    background: #f8fbff;
+    font-size: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.purchase-add-line > span {
+    font-size: 15px;
+    line-height: 1;
+}
+
+.purchase-lines-wrap {
+    overflow-x: auto;
+    border: 1px solid #edf0f5;
+    border-radius: 7px;
+}
+
+.purchase-lines-table {
+    width: 100%;
+    min-width: 490px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.purchase-lines-table th {
+    height: 29px;
+    padding: 0 8px;
+    border-bottom: 1px solid #edf0f5;
+    color: #8995a6;
+    background: #fafbfd;
+    font-size: 7px;
+    letter-spacing: 0.55px;
+}
+
+.purchase-lines-table td {
+    padding: 6px 7px;
+    border-bottom: 1px solid #f0f2f6;
+}
+
+.purchase-product-select,
+.purchase-line-input {
+    width: 100%;
+    height: 31px;
+    padding: 0 7px;
+    border: 1px solid #e1e7ef;
+    border-radius: 5px;
+    outline: none;
+    color: #34445d;
+    background: #fff;
+    font-size: 8px;
+}
+
+.purchase-product-select {
+    min-width: 190px;
+}
+
+.purchase-line-input {
+    min-width: 61px;
+}
+
+.purchase-line-total {
+    color: #33425a;
+    font-size: 8px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.purchase-remove-line {
+    display: grid;
+    width: 25px;
+    height: 25px;
+    place-items: center;
+    border: 0;
+    border-radius: 5px;
+    color: #9aa5b4;
+    background: transparent;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.purchase-remove-line:hover:not(:disabled) {
+    color: #bd4d4d;
+    background: #fff1f1;
+}
+
+.purchase-remove-line:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.purchase-dialog-total {
+    display: flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 15px;
+    border-bottom: 1px solid #edf0f5;
+    color: #738197;
+    font-size: 9px;
+}
+
+.purchase-dialog-total strong {
+    min-width: 80px;
+    color: #263650;
+    font-family: "Manrope", "Segoe UI", sans-serif;
+    font-size: 13px;
+    text-align: right;
+}
+
+.purchase-notes-field {
+    margin-top: 12px;
+}
+
+.purchase-dialog-message {
+    display: none;
+    margin: 12px 0 0;
+    padding: 8px 9px;
+    border-radius: 6px;
+    color: #a43e3e;
+    background: #fceeee;
+    font-size: 8px;
+    line-height: 1.5;
+}
+
+.purchase-dialog-message.is-visible {
+    display: block;
+}
+
+.purchase-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.purchase-cancel-button,
+.purchase-submit-button {
+    min-height: 33px;
+    padding: 0 11px;
+    border-radius: 7px;
+    font: inherit;
+    font-size: 9px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.purchase-cancel-button {
+    border: 1px solid #e0e6ef;
+    color: #66748a;
+    background: #fff;
+}
+
+.purchase-submit-button {
+    border: 1px solid #286bc3;
+    color: #fff;
+    background: #286bc3;
+}
+
+.purchase-submit-button:hover {
+    border-color: #1e5cad;
+    background: #1e5cad;
+}
+
+.purchase-detail-body {
+    display: grid;
+    gap: 11px;
+}
+
+.purchase-detail-meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+    padding: 11px;
+    border: 1px solid #edf0f5;
+    border-radius: 8px;
+    background: #fafbfd;
+}
+
+.purchase-detail-meta span {
+    display: grid;
+    gap: 4px;
+    color: #33425a;
+    font-size: 9px;
+    font-weight: 600;
+}
+
+.purchase-detail-meta small {
+    color: #929eae;
+    font-size: 8px;
+    font-weight: 400;
+}
+
+.purchase-detail-items {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.purchase-detail-items th,
+.purchase-detail-items td {
+    padding: 8px 6px;
+    border-bottom: 1px solid #edf0f5;
+    color: #66748a;
+    font-size: 8px;
+}
+
+.purchase-detail-items th {
+    color: #8995a6;
+    font-size: 7px;
+    letter-spacing: 0.5px;
+}
+
+.purchase-detail-items td:last-child {
+    color: #33425a;
+    font-weight: 600;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.purchase-detail-total {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    color: #738197;
+    font-size: 9px;
+}
+
+.purchase-detail-total strong {
+    min-width: 75px;
+    color: #263650;
+    text-align: right;
+}
+
+.purchase-detail-notes {
+    margin: 0;
+    color: #75839a;
+    font-size: 9px;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .purchase-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .purchase-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 560px) {
+    .purchases-content {
+        padding-top: 21px;
+    }
+
+    .purchases-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 11px;
+    }
+
+    .purchase-stats {
+        gap: 8px;
+    }
+
+    .purchase-stat-card {
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .purchase-stat-icon {
+        width: 31px;
+        height: 31px;
+    }
+
+    .purchase-filters {
+        width: 100%;
+    }
+
+    .purchase-search {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+    }
+
+    .purchase-search input {
+        font-size: 8px;
+    }
+
+    .purchase-status-filter select {
+        width: 91px;
+    }
+
+    .purchase-dialog-form,
+    .purchase-detail-content {
+        padding: 15px;
+    }
+
+    .purchase-dialog-fields {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .purchase-dialog-actions {
+        position: sticky;
+        bottom: -15px;
+        padding: 10px 0 1px;
+        background: #fff;
+    }
+}

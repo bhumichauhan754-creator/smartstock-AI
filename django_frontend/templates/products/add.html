@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f8fc">
+    <title>Add Product | SmartStock AI</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/product-form.css">
+</head>
+<body>
+    <div class="dashboard-shell">
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+            <a class="brand" href="/dashboard/" aria-label="SmartStock AI dashboard">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <path d="M5 10.5 16 5l11 5.5v11L16 27 5 21.5v-11Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="m5.5 10.8 10.5 5.4 10.5-5.4M16 16.5V27" stroke="currentColor" stroke-width="2"/>
+                        <path d="m11 7.6 11 5.6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </span>
+                <span>SmartStock <span class="brand-light">AI</span></span>
+            </a>
+            <div class="workspace-switcher">
+                <span class="workspace-avatar">A</span>
+                <span class="workspace-copy"><strong>Acme Workspace</strong><small>Inventory team</small></span>
+                <svg class="workspace-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <nav class="side-nav">
+                <span class="nav-caption">WORKSPACE</span>
+                <a class="nav-link" href="/dashboard/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3.5" width="7" height="4" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="10.5" width="7" height="10" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Dashboard</span></a>
+                <a class="nav-link active" href="/products/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8.5 4.5v9L12 21l-8.5-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m3.8 7.7 8.2 4.5 8.2-4.5M12 12.2V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Products</span></a>
+                <a class="nav-link" href="/categories/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Categories</span></a>
+                <span class="nav-caption nav-caption-spaced">OPERATIONS</span>
+                <a class="nav-link" href="/stock/in/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stock In</span></a>
+                <a class="nav-link" href="/stock/out/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v12m0 0 4.5-4.5M12 16l-4.5-4.5M5 18v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stock Out</span></a>
+                <a class="nav-link" href="/purchases/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h2l2.2 10.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 9H7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.5" cy="20" r="1" fill="currentColor"/><circle cx="17.5" cy="20" r="1" fill="currentColor"/></svg><span>Purchases</span></a>
+                <a class="nav-link" href="/sales/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l4-4 3 2 5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 7H20v3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sales</span></a>
+                <span class="nav-caption nav-caption-spaced">DIRECTORY</span>
+                <a class="nav-link" href="/suppliers/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M16 5.2a3.2 3.2 0 0 1 0 6.2m1 2.8a4.5 4.5 0 0 1 3.5 4.4V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Suppliers</span></a>
+                <a class="nav-link" href="/customers/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M17 8h4m-2-2v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Customers</span></a>
+                <a class="nav-link" href="/reports/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.5h8l4 4V20a.5.5 0 0 1-.5.5h-11A.5.5 0 0 1 6 20V3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3.5v4h4M9 12h6m-6 3.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Reports</span></a>
+                <a class="nav-link" href="/audit/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Audit History</span></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a class="nav-link" href="/settings/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="m19.4 15 .1.1a1.8 1.8 0 1 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3 .9v.2a1.8 1.8 0 1 1-3.6 0v-.2a1.8 1.8 0 0 0-3-.9l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-.9-3h-.2a1.8 1.8 0 1 1 0-3.6h.2a1.8 1.8 0 0 0 .9-3l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3-.9v-.2a1.8 1.8 0 1 1 3.6 0v.2a1.8 1.8 0 0 0 3 .9l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 .9 3h.2a1.8 1.8 0 1 1 0 3.6h-.2a1.8 1.8 0 0 0-.9 3Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>Settings</span></a>
+                <div class="sidebar-user">
+                    <span class="user-avatar">BC</span>
+                    <span class="user-copy"><strong>Bhumi Chauhan</strong><small>Administrator</small></span>
+                    <a class="user-menu-link" href="/profile/" aria-label="Open user profile"><span aria-hidden="true">›</span></a>
+                </div>
+            </div>
+        </aside>
+        <button class="sidebar-scrim" id="sidebarScrim" type="button" aria-label="Close navigation"></button>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="icon-button sidebar-toggle" id="sidebarToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
+                    <div class="breadcrumb"><a href="/products/">Products</a><span class="breadcrumb-divider">/</span><strong>Add product</strong></div>
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-button notification-button" id="notificationButton" type="button" aria-label="Notifications" aria-expanded="false">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <a class="topbar-avatar" href="/profile/" aria-label="Your profile">BC</a>
+                    <div class="notification-popover" id="notificationPopover" role="status" hidden><strong>You're all caught up</strong><span>No new notifications right now.</span></div>
+                </div>
+            </header>
+
+            <div class="page-content product-form-content">
+                <section class="page-heading form-page-heading">
+                    <div>
+                        <p class="date-label">PRODUCT CATALOG</p>
+                        <h1>Add a product</h1>
+                        <p class="page-subtitle">Create a new item and set its pricing and stock details.</p>
+                    </div>
+                    <a class="secondary-button back-button" href="/products/">
+                        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16 10H4m5 5-5-5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Back to products
+                    </a>
+                </section>
+
+                <form id="productForm" class="product-form" method="post" action="/products/add/" enctype="multipart/form-data" data-demo="{{ demo|yesno:'true,false' }}" novalidate>
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    <div class="form-layout">
+                        <div class="form-main-column">
+                            <section class="form-card">
+                                <div class="form-card-heading">
+                                    <span class="form-card-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8.5 4.5v9L12 21l-8.5-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m3.8 7.7 8.2 4.5 8.2-4.5M12 12.2V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                                    </span>
+                                    <span><h2>Product information</h2><p>Add the basic details customers and staff will see.</p></span>
+                                </div>
+
+                                <div class="form-fields">
+                                    <div class="form-field full-width">
+                                        <label for="productName">Product name <span>*</span></label>
+                                        <input id="productName" name="name" type="text" maxlength="120" placeholder="e.g. Wireless Headphones" autocomplete="off" required>
+                                        <small class="field-help">Use a clear name that is easy to recognize.</small>
+                                        <p class="input-error" id="productNameError"></p>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="productSku">SKU <span>*</span></label>
+                                        <input id="productSku" name="sku" type="text" maxlength="40" placeholder="e.g. ELEC-042" autocomplete="off" required aria-describedby="skuHelp skuError">
+                                        <small class="field-help" id="skuHelp">A unique code for tracking this item.</small>
+                                        <p class="input-error" id="skuError"></p>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="productCategory">Category <span>*</span></label>
+                                        <select id="productCategory" name="category" required>
+                                            <option value="">Choose a category</option>
+                                            <option value="Electronics">Electronics</option>
+                                            <option value="Accessories">Accessories</option>
+                                            <option value="Office supplies">Office supplies</option>
+                                            <option value="Furniture">Furniture</option>
+                                        </select>
+                                        <template id="serverProductCategories">
+                                            {% for category in categories %}<option value="{{ category.name }}">{{ category.name }}</option>{% endfor %}
+                                        </template>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="productUnit">Unit of measure</label>
+                                        <select id="productUnit" name="unit">
+                                            <option value="Units">Units</option>
+                                            <option value="Boxes">Boxes</option>
+                                            <option value="Pairs">Pairs</option>
+                                            <option value="Kg">Kilograms (kg)</option>
+                                            <option value="Litres">Litres</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-field full-width">
+                                        <label for="productDescription">Description <span class="optional-label">Optional</span></label>
+                                        <textarea id="productDescription" name="description" rows="3" maxlength="300" placeholder="Add a short description of this product..."></textarea>
+                                        <small class="field-help">Up to 300 characters.</small>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="form-card image-card">
+                                <div class="form-card-heading">
+                                    <span class="form-card-icon image-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.7"/><circle cx="8.5" cy="9" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="m4 17 5-5 3.5 3.5 2.5-2.5 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                    </span>
+                                    <span><h2>Product image</h2><p>Help your team identify this item at a glance.</p></span>
+                                </div>
+                                <div class="image-upload-area" id="imageDropArea">
+                                    <div class="image-preview" id="imagePreview">
+                                        <svg id="imagePreviewIcon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2.5" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="9" r="1.5" stroke="currentColor" stroke-width="1.5"/><path d="m4 17 5-5 3.5 3.5 2.5-2.5 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                        <img id="imagePreviewPhoto" alt="Selected product preview" hidden>
+                                    </div>
+                                    <div class="upload-copy">
+                                        <label class="upload-button" for="productImage">Choose an image</label>
+                                        <p>or drag and drop an image here</p>
+                                        <small>PNG, JPG, or WebP · up to 1 MB</small>
+                                    </div>
+                                    <input id="productImage" name="image" type="file" accept="image/png,image/jpeg,image/webp">
+                                </div>
+                                <p class="input-error" id="imageError"></p>
+                            </section>
+                        </div>
+
+                        <div class="form-side-column">
+                            <section class="form-card">
+                                <div class="form-card-heading">
+                                    <span class="form-card-icon price-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M14.8 9.2c-.5-.8-1.4-1.2-2.8-1.2-1.5 0-2.5.7-2.5 1.7 0 2.6 5.1 1.2 5.1 4 0 1.2-1 2-2.7 2-1.4 0-2.5-.5-3.1-1.5M12 6.5v11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                    </span>
+                                    <span><h2>Pricing</h2><p>Set your product costs and selling price.</p></span>
+                                </div>
+                                <div class="form-fields side-fields">
+                                    <div class="form-field">
+                                        <label for="purchasePrice">Purchase price <span>*</span></label>
+                                        <div class="input-with-prefix"><span>₹</span><input id="purchasePrice" name="purchase_price" type="number" min="0" step="0.01" placeholder="0.00" required></div>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="sellingPrice">Selling price <span>*</span></label>
+                                        <div class="input-with-prefix"><span>₹</span><input id="sellingPrice" name="selling_price" type="number" min="0" step="0.01" placeholder="0.00" required></div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section class="form-card">
+                                <div class="form-card-heading">
+                                    <span class="form-card-icon stock-icon">
+                                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6.5 12 3l8 3.5v11L12 21l-8-3.5v-11Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M4.5 7 12 10.5 19.5 7M12 10.5V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                                    </span>
+                                    <span><h2>Stock levels</h2><p>Track quantity and get low-stock alerts.</p></span>
+                                </div>
+                                <div class="form-fields side-fields">
+                                    <div class="form-field">
+                                        <label for="availableQuantity">Available quantity <span>*</span></label>
+                                        <input id="availableQuantity" name="quantity" type="number" min="0" step="any" placeholder="0" required>
+                                    </div>
+                                    <div class="form-field">
+                                        <label for="minimumStock">Minimum stock level <span>*</span></label>
+                                        <input id="minimumStock" name="minimum_stock" type="number" min="0" step="any" placeholder="10" required>
+                                        <small class="field-help">You’ll be alerted when stock falls below this level.</small>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <aside class="form-tip">
+                                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.5" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v4m0-7h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                                <p><strong>Keep your catalog accurate</strong><br>Use a unique SKU for each product. This makes stock tracking and reporting more reliable.</p>
+                            </aside>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <p id="formMessage" class="form-message" role="status" aria-live="polite" data-server-error="{{ server_error|default:'' }}"></p>
+                        <div>
+                            <a class="cancel-button" href="/products/">Cancel</a>
+                            <button class="primary-button save-product-button" type="submit">
+                                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5 8 14l8-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                                Save product
+                            </button>
+                        </div>
+                    </div>
+                </form>
+                <footer class="page-footer">SmartStock AI <span>·</span> Product catalog</footer>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/product-form.js" defer></script>
+</body>
+</html>

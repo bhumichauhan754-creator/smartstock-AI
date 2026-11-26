@@ -1,0 +1,19 @@
+.stock-out-content .stock-in-badge {
+    border-color: #f2dddd;
+    color: #b94f58;
+    background: #fff5f5;
+}
+
+.stock-out-content .received-icon {
+    color: #bd5a62;
+    background: #fff0f0;
+}
+
+.stock-out-content .product-lines-icon {
+    color: #bd5a62;
+    background: #fff0f0;
+}
+
+.stock-out-content .hint-dot {
+    background: #d66b72;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f8fc">
+    <title>Audit History | SmartStock AI</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/audit.css">
+</head>
+<body data-demo="{{ demo|yesno:'true,false' }}">
+    <div class="dashboard-shell">
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+            <a class="brand" href="/dashboard/" aria-label="SmartStock AI dashboard">
+                <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M5 10.5 16 5l11 5.5v11L16 27 5 21.5v-11Z" stroke="currentColor" stroke-width="2"/><path d="m5.5 10.8 10.5 5.4 10.5-5.4M16 16.5V27" stroke="currentColor" stroke-width="2"/></svg></span>
+                <span>SmartStock <span class="brand-light">AI</span></span>
+            </a>
+            <div class="workspace-switcher"><span class="workspace-avatar">A</span><span class="workspace-copy"><strong>Acme Workspace</strong><small>Inventory team</small></span></div>
+            <nav class="side-nav">
+                <span class="nav-caption">WORKSPACE</span>
+                <a class="nav-link" href="/dashboard/"><span aria-hidden="true">▦</span><span>Dashboard</span></a>
+                <a class="nav-link" href="/products/"><span aria-hidden="true">◇</span><span>Products</span></a>
+                <a class="nav-link" href="/categories/"><span aria-hidden="true">▧</span><span>Categories</span></a>
+                <span class="nav-caption nav-caption-spaced">OPERATIONS</span>
+                <a class="nav-link" href="/stock/in/"><span aria-hidden="true">↑</span><span>Stock In</span></a>
+                <a class="nav-link" href="/stock/out/"><span aria-hidden="true">↓</span><span>Stock Out</span></a>
+                <a class="nav-link" href="/purchases/"><span aria-hidden="true">▱</span><span>Purchases</span></a>
+                <a class="nav-link" href="/sales/"><span aria-hidden="true">↗</span><span>Sales</span></a>
+                <span class="nav-caption nav-caption-spaced">DIRECTORY</span>
+                <a class="nav-link" href="/suppliers/"><span aria-hidden="true">♧</span><span>Suppliers</span></a>
+                <a class="nav-link" href="/customers/"><span aria-hidden="true">♙</span><span>Customers</span></a>
+                <a class="nav-link" href="/reports/"><span aria-hidden="true">▤</span><span>Reports</span></a>
+                <a class="nav-link active" href="/audit/" aria-current="page"><span aria-hidden="true">◷</span><span>Audit History</span></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a class="nav-link" href="/settings/"><span aria-hidden="true">⚙</span><span>Settings</span></a>
+                <div class="sidebar-user"><span class="user-avatar">BC</span><span class="user-copy"><strong>Bhumi Chauhan</strong><small>Administrator</small></span><a class="user-menu-link" href="/profile/" aria-label="Open user profile"><span aria-hidden="true">›</span></a></div>
+            </div>
+        </aside>
+        <button class="sidebar-scrim" id="sidebarScrim" type="button" aria-label="Close navigation"></button>
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="icon-button sidebar-toggle" id="sidebarToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
+                    <div class="breadcrumb"><span>Workspace</span><span class="breadcrumb-divider">/</span><strong>Audit History</strong></div>
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-button notification-button" id="notificationButton" type="button" aria-label="Notifications" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="notification-dot"></span></button>
+                    <a class="topbar-avatar" href="/profile/" aria-label="Your profile">BC</a>
+                    <div class="notification-popover" id="notificationPopover" role="status" hidden><strong>You're all caught up</strong><span>No new notifications right now.</span></div>
+                </div>
+            </header>
+
+            <div class="page-content audit-content">
+                <section class="page-heading audit-heading">
+                    <div>
+                        <p class="date-label">SECURITY &amp; ACTIVITY</p>
+                        <h1>Audit History</h1>
+                        <p class="page-subtitle">Review important changes and inventory activity across your workspace.</p>
+                    </div>
+                    <button class="primary-button" id="exportAuditButton" type="button">
+                        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 3v9m0 0 3.5-3.5M10 12 6.5 8.5M4 13v3.5A.5.5 0 0 0 4.5 17h11a.5.5 0 0 0 .5-.5V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Export CSV
+                    </button>
+                </section>
+
+                <div class="audit-notice"><span class="audit-notice-dot" aria-hidden="true"></span><span>Workspace activity history</span></div>
+                <p class="audit-feedback" id="auditFeedback" role="status" aria-live="polite"></p>
+
+                <section class="audit-stats" aria-label="Audit activity summary">
+                    <article class="audit-stat-card"><span class="audit-stat-icon audit-icon-blue" aria-hidden="true">◷</span><span><small>Total events</small><strong id="totalEvents">0</strong><small class="audit-stat-caption">in this activity log</small></span></article>
+                    <article class="audit-stat-card"><span class="audit-stat-icon audit-icon-green" aria-hidden="true">✓</span><span><small>Today</small><strong id="todayEvents">0</strong><small class="audit-stat-caption">events recorded</small></span></article>
+                    <article class="audit-stat-card"><span class="audit-stat-icon audit-icon-purple" aria-hidden="true">↕</span><span><small>Stock movements</small><strong id="stockEvents">0</strong><small class="audit-stat-caption">received or dispatched</small></span></article>
+                    <article class="audit-stat-card"><span class="audit-stat-icon audit-icon-amber" aria-hidden="true">♙</span><span><small>Team members</small><strong id="teamMembers">0</strong><small class="audit-stat-caption">active in this log</small></span></article>
+                </section>
+
+                <section class="audit-panel" aria-label="Activity history">
+                    <div class="audit-toolbar">
+                        <div class="audit-panel-title"><h2>Activity log</h2><p>Search and filter workspace events.</p></div>
+                        <div class="audit-filters">
+                            <label class="audit-search">
+                                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                                <input id="auditSearch" type="search" placeholder="Search activity..." aria-label="Search audit history">
+                            </label>
+                            <label class="audit-select-wrap"><span class="visually-hidden">Filter by module</span><select id="auditModuleFilter"><option value="">All modules</option><option value="Products">Products</option><option value="Categories">Categories</option><option value="Stock">Stock</option><option value="Purchases">Purchases</option><option value="Sales">Sales</option><option value="Suppliers">Suppliers</option><option value="Customers">Customers</option><option value="Settings">Settings</option></select><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></label>
+                            <label class="audit-select-wrap"><span class="visually-hidden">Filter by action</span><select id="auditActionFilter"><option value="">All actions</option><option value="created">Created</option><option value="updated">Updated</option><option value="deleted">Deleted</option><option value="status">Status change</option><option value="stock">Stock movement</option><option value="archived">Archived</option></select><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></label>
+                            <label class="audit-select-wrap"><span class="visually-hidden">Filter by date</span><select id="auditDateFilter"><option value="all">All time</option><option value="today">Today</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option></select><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></label>
+                        </div>
+                    </div>
+                    <div class="audit-table-wrap">
+                        <table class="audit-table">
+                            <thead><tr><th scope="col">DATE &amp; TIME</th><th scope="col">USER</th><th scope="col">ACTION</th><th scope="col">RECORD</th><th scope="col">DETAILS</th></tr></thead>
+                            <tbody id="auditRows"></tbody>
+                        </table>
+                        <div class="audit-empty" id="auditEmpty" hidden><strong>No activity found</strong><span>Try adjusting your search or filters.</span></div>
+                    </div>
+                    <div class="audit-table-footer"><span id="auditResults">Showing events</span><span>{{ total_events }} recorded events</span></div>
+                </section>
+                <footer class="page-footer">SmartStock AI <span>·</span> Audit history</footer>
+            </div>
+        </main>
+    </div>
+    {{ audit_data|json_script:"auditData" }}
+    <script src="/static/js/audit.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f8fc">
+    <title>My Profile | SmartStock AI</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
+</head>
+<body data-demo="{{ demo|yesno:'true,false' }}">
+    <div class="dashboard-shell">
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+            <a class="brand" href="/dashboard/" aria-label="SmartStock AI dashboard">
+                <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M5 10.5 16 5l11 5.5v11L16 27 5 21.5v-11Z" stroke="currentColor" stroke-width="2"/><path d="m5.5 10.8 10.5 5.4 10.5-5.4M16 16.5V27" stroke="currentColor" stroke-width="2"/></svg></span>
+                <span>SmartStock <span class="brand-light">AI</span></span>
+            </a>
+            <div class="workspace-switcher"><span class="workspace-avatar">{{ workspace.name|first|upper }}</span><span class="workspace-copy"><strong>{{ workspace.name }}</strong><small>{{ workspace.team_name }}</small></span></div>
+            <nav class="side-nav">
+                <span class="nav-caption">WORKSPACE</span>
+                <a class="nav-link" href="/dashboard/"><span aria-hidden="true">▦</span><span>Dashboard</span></a>
+                <a class="nav-link" href="/products/"><span aria-hidden="true">◇</span><span>Products</span></a>
+                <a class="nav-link" href="/categories/"><span aria-hidden="true">▧</span><span>Categories</span></a>
+                <span class="nav-caption nav-caption-spaced">OPERATIONS</span>
+                <a class="nav-link" href="/stock/in/"><span aria-hidden="true">↑</span><span>Stock In</span></a>
+                <a class="nav-link" href="/stock/out/"><span aria-hidden="true">↓</span><span>Stock Out</span></a>
+                <a class="nav-link" href="/purchases/"><span aria-hidden="true">▱</span><span>Purchases</span></a>
+                <a class="nav-link" href="/sales/"><span aria-hidden="true">↗</span><span>Sales</span></a>
+                <span class="nav-caption nav-caption-spaced">DIRECTORY</span>
+                <a class="nav-link" href="/suppliers/"><span aria-hidden="true">♧</span><span>Suppliers</span></a>
+                <a class="nav-link" href="/customers/"><span aria-hidden="true">♙</span><span>Customers</span></a>
+                <a class="nav-link" href="/reports/"><span aria-hidden="true">▤</span><span>Reports</span></a>
+                <a class="nav-link" href="/audit/"><span aria-hidden="true">◷</span><span>Audit History</span></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a class="nav-link" href="/settings/"><span aria-hidden="true">⚙</span><span>Settings</span></a>
+                <div class="sidebar-user"><span class="user-avatar" id="sidebarAvatar">{{ request.user.first_name|default:request.user.username|first|upper }}</span><span class="user-copy"><strong id="sidebarUserName">{{ request.user.get_full_name|default:request.user.username }}</strong><small>{{ user_role }}</small></span><a class="user-menu-link" href="/profile/" aria-label="Open user profile" aria-current="page"><span aria-hidden="true">›</span></a></div>
+            </div>
+        </aside>
+        <button class="sidebar-scrim" id="sidebarScrim" type="button" aria-label="Close navigation"></button>
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="icon-button sidebar-toggle" id="sidebarToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
+                    <div class="breadcrumb"><span>Account</span><span class="breadcrumb-divider">/</span><strong>My Profile</strong></div>
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-button notification-button" id="notificationButton" type="button" aria-label="Notifications" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="notification-dot"></span></button>
+                    <a class="topbar-avatar" id="topbarAvatar" href="/profile/" aria-label="Your profile" aria-current="page">{{ request.user.first_name|default:request.user.username|first|upper }}</a>
+                    <div class="notification-popover" id="notificationPopover" role="status" hidden><strong>You're all caught up</strong><span>No new notifications right now.</span></div>
+                </div>
+            </header>
+
+            <div class="page-content profile-content">
+                <section class="page-heading profile-heading">
+                    <div><p class="date-label">ACCOUNT SETTINGS</p><h1>My Profile</h1><p class="page-subtitle">Manage your personal information and workspace identity.</p></div>
+                </section>
+
+                <section class="profile-hero" aria-label="Profile summary">
+                    <div class="profile-hero-identity">
+                        <span class="profile-hero-avatar" id="profileAvatar">{{ request.user.first_name|default:request.user.username|first|upper }}</span>
+                        <div class="profile-hero-copy">
+                            <span class="profile-active-status"><i aria-hidden="true"></i> Active account</span>
+                            <h2 id="profileNameDisplay">{{ request.user.get_full_name|default:request.user.username }}</h2>
+                            <p><span id="profileRoleDisplay">{{ user_role }}</span><span class="profile-divider">·</span><span id="profileDepartmentDisplay">{{ profile.department|default:"No department" }}</span></p>
+                        </div>
+                    </div>
+                    <a class="profile-activity-link" href="/audit/">View account activity <span aria-hidden="true">→</span></a>
+                </section>
+
+                <p class="profile-feedback{% if server_error %} is-visible is-error{% endif %}" id="profileFeedback" role="status" aria-live="polite">{{ server_error }}</p>
+                <p class="profile-storage-warning" id="profileStorageWarning" role="alert" hidden></p>
+
+                <div class="profile-layout">
+                    <section class="profile-card profile-form-card" aria-labelledby="profileFormHeading">
+                        <div class="profile-card-heading">
+                            <div><h2 id="profileFormHeading">Personal information</h2><p>Update the details associated with your workspace profile.</p></div>
+                            <span class="profile-edit-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m14 5 5 5M4 20l4.5-1 10-10a2.1 2.1 0 0 0-3-3l-10 10L4 20Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        </div>
+                        <form id="profileForm" method="post" action="/profile/" data-demo="{{ demo|yesno:'true,false' }}" novalidate>
+                            {% csrf_token %}
+                            <div class="profile-fields">
+                                <div class="profile-field">
+                                    <label for="profileFullName">Full name <span>*</span></label>
+                                    <input id="profileFullName" name="full_name" type="text" maxlength="80" autocomplete="name" required value="{{ form.full_name.value|default_if_none:'' }}">
+                                    {{ form.full_name.errors }}
+                                </div>
+                                <div class="profile-field">
+                                    <label for="profileEmail">Email address <span>*</span></label>
+                                    <input id="profileEmail" name="email" type="email" maxlength="120" autocomplete="email" required value="{{ form.email.value|default_if_none:'' }}">
+                                    {{ form.email.errors }}
+                                </div>
+                                <div class="profile-field">
+                                    <label for="profilePhone">Phone number</label>
+                                    <input id="profilePhone" name="phone" type="tel" maxlength="30" autocomplete="tel" value="{{ form.phone.value|default_if_none:'' }}">
+                                </div>
+                                <div class="profile-field">
+                                    <label for="profileRole">Workspace role</label>
+                                    <input id="profileRole" name="role" type="text" value="{{ user_role }}" readonly aria-describedby="profileRoleHint">
+                                    <small id="profileRoleHint">Roles are managed by your workspace administrator.</small>
+                                </div>
+                                <div class="profile-field">
+                                    <label for="profileDepartment">Department</label>
+                                    <input id="profileDepartment" name="department" type="text" maxlength="80" value="{{ form.department.value|default_if_none:'' }}">
+                                </div>
+                                <div class="profile-field">
+                                    <label for="profileTimezone">Time zone</label>
+                                    <select id="profileTimezone" name="timezone">
+                                        {% for value, label in form.fields.timezone.choices %}
+                                        <option value="{{ value }}"{% if form.timezone.value == value %} selected{% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="profile-field profile-field-wide">
+                                    <label for="profileBio">About</label>
+                                    <textarea id="profileBio" name="bio" rows="3" maxlength="240" placeholder="Add a short introduction for your workspace...">{{ form.bio.value|default_if_none:'' }}</textarea>
+                                    <small class="profile-character-count" id="profileBioCount">0 / 240 characters</small>
+                                </div>
+                            </div>
+                            <div class="profile-form-footer">
+                                <span class="profile-form-note"><i aria-hidden="true">i</i> Changes are saved to your account.</span>
+                                <div class="profile-form-actions">
+                                    <button class="profile-reset-button" id="resetProfileButton" type="button">Discard changes</button>
+                                    <button class="primary-button profile-save-button" type="submit">Save changes</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+                    <aside class="profile-aside" aria-label="Account details">
+                        <section class="profile-card account-card">
+                            <div class="profile-side-heading"><span class="profile-side-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M4 20v-1.5A4.5 4.5 0 0 1 8.5 14h7a4.5 4.5 0 0 1 4.5 4.5V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><h2>Account details</h2></div>
+                            <dl class="account-details">
+                                <div><dt>Account ID</dt><dd>STK-{{ request.user.pk }}</dd></div>
+                                <div><dt>Member since</dt><dd>{{ request.user.date_joined|date:"F Y" }}</dd></div>
+                                <div><dt>Workspace</dt><dd>{{ workspace.name }}</dd></div>
+                                <div><dt>Account status</dt><dd><span class="account-status">Active</span></dd></div>
+                            </dl>
+                        </section>
+                        <section class="profile-card security-card">
+                            <div class="profile-side-heading"><span class="profile-side-icon security-side-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="10" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><h2>Account security</h2></div>
+                            <p class="security-copy">Your sign-in and password will be managed securely by Django Authentication when the backend is connected.</p>
+                            <a class="security-link" href="/settings/">Go to settings <span aria-hidden="true">→</span></a>
+                        </section>
+                    </aside>
+                </div>
+                <footer class="page-footer">SmartStock AI <span>·</span> My profile</footer>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/profile.js" defer></script>
+</body>
+</html>

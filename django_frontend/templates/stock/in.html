@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f8fc">
+    <title>Stock In | SmartStock AI</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/stock-in.css">
+</head>
+<body data-demo="{{ demo|yesno:'true,false' }}">
+    <div class="dashboard-shell">
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+            <a class="brand" href="/dashboard/" aria-label="SmartStock AI dashboard">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none"><path d="M5 10.5 16 5l11 5.5v11L16 27 5 21.5v-11Z" stroke="currentColor" stroke-width="2"/><path d="m5.5 10.8 10.5 5.4 10.5-5.4M16 16.5V27" stroke="currentColor" stroke-width="2"/><path d="m11 7.6 11 5.6" stroke="currentColor" stroke-width="2"/></svg>
+                </span>
+                <span>SmartStock <span class="brand-light">AI</span></span>
+            </a>
+            <div class="workspace-switcher">
+                <span class="workspace-avatar">A</span>
+                <span class="workspace-copy"><strong>Acme Workspace</strong><small>Inventory team</small></span>
+                <svg class="workspace-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <nav class="side-nav">
+                <span class="nav-caption">WORKSPACE</span>
+                <a class="nav-link" href="/dashboard/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3.5" width="7" height="4" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="10.5" width="7" height="10" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Dashboard</span></a>
+                <a class="nav-link" href="/products/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8.5 4.5v9L12 21l-8.5-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m3.8 7.7 8.2 4.5 8.2-4.5M12 12.2V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Products</span></a>
+                <a class="nav-link" href="/categories/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Categories</span></a>
+                <span class="nav-caption nav-caption-spaced">OPERATIONS</span>
+                <a class="nav-link active" href="/stock/in/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stock In</span></a>
+                <a class="nav-link" href="/stock/out/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v12m0 0 4.5-4.5M12 16l-4.5-4.5M5 18v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stock Out</span></a>
+                <a class="nav-link" href="/purchases/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h2l2.2 10.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 9H7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.5" cy="20" r="1" fill="currentColor"/><circle cx="17.5" cy="20" r="1" fill="currentColor"/></svg><span>Purchases</span></a>
+                <a class="nav-link" href="/sales/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l4-4 3 2 5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 7H20v3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sales</span></a>
+                <span class="nav-caption nav-caption-spaced">DIRECTORY</span>
+                <a class="nav-link" href="/suppliers/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M16 5.2a3.2 3.2 0 0 1 0 6.2m1 2.8a4.5 4.5 0 0 1 3.5 4.4V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Suppliers</span></a>
+                <a class="nav-link" href="/customers/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M17 8h4m-2-2v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Customers</span></a>
+                <a class="nav-link" href="/reports/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.5h8l4 4V20a.5.5 0 0 1-.5.5h-11A.5.5 0 0 1 6 20V3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3.5v4h4M9 12h6m-6 3.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Reports</span></a>
+                <a class="nav-link" href="/audit/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Audit History</span></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a class="nav-link" href="/settings/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="m19.4 15 .1.1a1.8 1.8 0 1 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3 .9v.2a1.8 1.8 0 1 1-3.6 0v-.2a1.8 1.8 0 0 0-3-.9l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-.9-3h-.2a1.8 1.8 0 1 1 0-3.6h.2a1.8 1.8 0 0 0 .9-3l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3-.9v-.2a1.8 1.8 0 1 1 3.6 0v.2a1.8 1.8 0 0 0 3 .9l.1-.1a1.8 1.8 0 1 1 2.5 2.5l-.1.1a1.8 1.8 0 0 0 .9 3h.2a1.8 1.8 0 1 1 0 3.6h-.2a1.8 1.8 0 0 0-.9 3Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>Settings</span></a>
+                <div class="sidebar-user">
+                    <span class="user-avatar">BC</span>
+                    <span class="user-copy"><strong>Bhumi Chauhan</strong><small>Administrator</small></span>
+                    <a class="user-menu-link" href="/profile/" aria-label="Open user profile"><span aria-hidden="true">›</span></a>
+                </div>
+            </div>
+        </aside>
+        <button class="sidebar-scrim" id="sidebarScrim" type="button" aria-label="Close navigation"></button>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="icon-button sidebar-toggle" id="sidebarToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
+                    <div class="breadcrumb"><span>Operations</span><span class="breadcrumb-divider">/</span><strong>Stock In</strong></div>
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-button notification-button" id="notificationButton" type="button" aria-label="Notifications" aria-expanded="false">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        <span class="notification-dot"></span>
+                    </button>
+                    <a class="topbar-avatar" href="/profile/" aria-label="Your profile">BC</a>
+                    <div class="notification-popover" id="notificationPopover" role="status" hidden><strong>You're all caught up</strong><span>No new notifications right now.</span></div>
+                </div>
+            </header>
+
+            <div class="page-content stock-in-content">
+                <section class="page-heading stock-in-heading">
+                    <div>
+                        <p class="date-label">INVENTORY OPERATIONS</p>
+                        <h1>Stock In</h1>
+                        <p class="page-subtitle">Record incoming inventory and keep product quantities up to date.</p>
+                    </div>
+                    <span class="stock-in-badge"><span aria-hidden="true">↑</span> Inventory received</span>
+                </section>
+
+                <section class="stock-in-stats" aria-label="Stock-in summary">
+                    <article class="stock-in-stat-card">
+                        <span class="stock-in-stat-icon received-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        <span><small>Received today</small><strong id="receivedToday">0</strong><small class="stat-unit">units</small></span>
+                    </article>
+                    <article class="stock-in-stat-card">
+                        <span class="stock-in-stat-icon entries-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 5.5h14v13H5zM8 9h8M8 12h8M8 15h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                        <span><small>Entries today</small><strong id="entriesToday">0</strong><small class="stat-unit">receipts</small></span>
+                    </article>
+                    <article class="stock-in-stat-card latest-reference-card">
+                        <span class="stock-in-stat-icon reference-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M7 4h10v16l-5-3-5 3V4Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M9.5 8h5M9.5 11h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                        <span><small>Latest reference</small><strong id="latestReference">No entries yet</strong><small class="stat-unit">sample activity</small></span>
+                    </article>
+                </section>
+
+                <form id="stockInForm" class="stock-in-form" method="post" action="/stock/in/" data-demo="{{ demo|yesno:'true,false' }}" novalidate>
+                    {% csrf_token %}
+                    <section class="stock-in-card receipt-card">
+                        <div class="stock-in-card-heading">
+                            <span class="stock-in-card-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7.5h16M6.5 4h11v16h-11zM9 11h6m-6 3.5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                            <span><h2>Receipt details</h2><p>Identify the supplier and document this delivery.</p></span>
+                        </div>
+                        <div class="stock-in-fields">
+                            <div class="stock-in-field">
+                                <label for="stockReference">Reference number <span>*</span></label>
+                                <input id="stockReference" name="reference" type="text" maxlength="40" required>
+                                <small class="stock-in-help">A unique reference for this stock receipt.</small>
+                            </div>
+                            <div class="stock-in-field">
+                                <label for="receivedDate">Received date <span>*</span></label>
+                                <input id="receivedDate" name="received_date" type="date" required>
+                            </div>
+                            <div class="stock-in-field">
+                                <label for="supplierName">Supplier <span>*</span></label>
+                                <select id="supplierName" name="supplier" required>
+                                    <option value="">Choose a supplier</option>
+                                </select>
+                            </div>
+                            <div class="stock-in-field">
+                                <label for="supplierInvoice">Supplier invoice <span class="optional-label">Optional</span></label>
+                                <input id="supplierInvoice" name="supplier_invoice" type="text" maxlength="50" placeholder="e.g. INV-2048">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="stock-in-card items-card">
+                        <div class="stock-in-card-heading items-heading">
+                            <span class="stock-in-card-icon product-lines-icon"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8.5 4.5v9L12 21l-8.5-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="m3.8 7.7 8.2 4.5 8.2-4.5M12 12.2V21" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></span>
+                            <span><h2>Products received</h2><p>Select each product and enter the received quantity and unit cost.</p></span>
+                            <button class="add-stock-line" id="addStockLine" type="button"><span aria-hidden="true">+</span> Add product</button>
+                        </div>
+                        <div class="stock-lines-wrap">
+                            <table class="stock-lines-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">PRODUCT</th>
+                                        <th scope="col">QUANTITY</th>
+                                        <th scope="col">UNIT COST</th>
+                                        <th scope="col">LINE TOTAL</th>
+                                        <th scope="col"><span class="visually-hidden">Actions</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stockLines"></tbody>
+                            </table>
+                        </div>
+                        <div class="stock-lines-empty-hint"><span class="hint-dot"></span> Stock quantities update after this receipt is saved.</div>
+                        <div class="stock-in-total"><span>Total received value</span><strong id="stockInTotal">₹0.00</strong></div>
+                    </section>
+
+                    <section class="stock-in-card notes-card">
+                        <div class="stock-in-field">
+                            <label for="stockNotes">Notes <span class="optional-label">Optional</span></label>
+                            <textarea id="stockNotes" name="notes" rows="3" maxlength="300" placeholder="Add delivery details or any notes for your records..."></textarea>
+                        </div>
+                    </section>
+                    <div class="stock-in-actions">
+                        <p id="stockInMessage" class="stock-in-message{% if server_error %} is-visible is-error{% endif %}" role="status" aria-live="polite">{{ server_error }}</p>
+                        <div>
+                            <a class="stock-cancel-button" href="/products/">Cancel</a>
+                            <button class="stock-save-button" type="submit"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10.5 8 14l8-8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg> Save stock receipt</button>
+                        </div>
+                    </div>
+                </form>
+
+                <section class="recent-stock-panel" aria-label="Recent stock receipts">
+                    <div class="recent-stock-heading">
+                        <div><h2>Recent stock receipts</h2><p>Sample records from stock received in this browser.</p></div>
+                        <span class="recent-stock-tag">Latest activity</span>
+                    </div>
+                    <div class="recent-stock-table-wrap">
+                        <table class="recent-stock-table">
+                            <thead><tr><th scope="col">REFERENCE</th><th scope="col">SUPPLIER</th><th scope="col">DATE</th><th scope="col">PRODUCTS</th><th scope="col">TOTAL VALUE</th></tr></thead>
+                            <tbody id="recentStockRows"></tbody>
+                        </table>
+                        <div class="recent-stock-empty" id="recentStockEmpty">No stock receipts saved yet. Your sample entries will appear here.</div>
+                    </div>
+                </section>
+
+                <footer class="page-footer">SmartStock AI <span>·</span> Inventory operations</footer>
+            </div>
+        </main>
+    </div>
+    {{ product_data|json_script:"stockInProducts" }}
+    {{ supplier_data|json_script:"stockInSuppliers" }}
+    {{ receipt_data|json_script:"stockReceipts" }}
+    {{ stock_summary|json_script:"stockInSummary" }}
+    <script src="/static/js/stock-in.js" defer></script>
+</body>
+</html>

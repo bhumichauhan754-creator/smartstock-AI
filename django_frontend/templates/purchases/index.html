@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f8fc">
+    <title>Purchases | SmartStock AI</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/purchases.css">
+</head>
+<body data-demo="{{ demo|yesno:'true,false' }}">
+    <div class="dashboard-shell">
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+            <a class="brand" href="/dashboard/" aria-label="SmartStock AI dashboard">
+                <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M5 10.5 16 5l11 5.5v11L16 27 5 21.5v-11Z" stroke="currentColor" stroke-width="2"/><path d="m5.5 10.8 10.5 5.4 10.5-5.4M16 16.5V27" stroke="currentColor" stroke-width="2"/><path d="m11 7.6 11 5.6" stroke="currentColor" stroke-width="2"/></svg></span>
+                <span>SmartStock <span class="brand-light">AI</span></span>
+            </a>
+            <div class="workspace-switcher">
+                <span class="workspace-avatar">A</span>
+                <span class="workspace-copy"><strong>Acme Workspace</strong><small>Inventory team</small></span>
+                <svg class="workspace-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <nav class="side-nav">
+                <span class="nav-caption">WORKSPACE</span>
+                <a class="nav-link" href="/dashboard/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3.5" width="7" height="4" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="10.5" width="7" height="10" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Dashboard</span></a>
+                <a class="nav-link" href="/products/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8.5 4.5v9L12 21l-8.5-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m3.8 7.7 8.2 4.5 8.2-4.5M12 12.2V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Products</span></a>
+                <a class="nav-link" href="/categories/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Categories</span></a>
+                <span class="nav-caption nav-caption-spaced">OPERATIONS</span>
+                <a class="nav-link" href="/stock/in/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stock In</span></a>
+                <a class="nav-link" href="/stock/out/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v12m0 0 4.5-4.5M12 16l-4.5-4.5M5 18v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stock Out</span></a>
+                <a class="nav-link active" href="/purchases/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h2l2.2 10.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 9H7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.5" cy="20" r="1" fill="currentColor"/><circle cx="17.5" cy="20" r="1" fill="currentColor"/></svg><span>Purchases</span></a>
+                <a class="nav-link" href="/sales/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l4-4 3 2 5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 7H20v3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sales</span></a>
+                <span class="nav-caption nav-caption-spaced">DIRECTORY</span>
+                <a class="nav-link" href="/suppliers/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M16 5.2a3.2 3.2 0 0 1 0 6.2m1 2.8a4.5 4.5 0 0 1 3.5 4.4V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Suppliers</span></a>
+                <a class="nav-link" href="/customers/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M17 8h4m-2-2v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Customers</span></a>
+                <a class="nav-link" href="/reports/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.5h8l4 4V20a.5.5 0 0 1-.5.5h-11A.5.5 0 0 1 6 20V3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3.5v4h4M9 12h6m-6 3.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Reports</span></a>
+                <a class="nav-link" href="/audit/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Audit History</span></a>
+            </nav>
+            <div class="sidebar-bottom">
+                <a class="nav-link" href="/settings/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="m19.4 15 .1.1a1.8 1.8 0 1 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3 .9v.2a1.8 1.8 0 1 1-3.6 0v-.2a1.8 1.8 0 0 0-3-.9l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-.9-3h-.2a1.8 1.8 0 1 1 0-3.6h.2a1.8 1.8 0 0 0 .9-3l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3-.9v-.2a1.8 1.8 0 1 1 3.6 0v.2a1.8 1.8 0 0 0 3 .9l.1-.1a1.8 1.8 0 1 1 2.5 2.5l.1.1a1.8 1.8 0 0 0 .9 3h.2a1.8 1.8 0 1 1 0 3.6h-.2a1.8 1.8 0 0 0-.9 3Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>Settings</span></a>
+                <div class="sidebar-user"><span class="user-avatar">BC</span><span class="user-copy"><strong>Bhumi Chauhan</strong><small>Administrator</small></span><a class="user-menu-link" href="/profile/" aria-label="Open user profile"><span aria-hidden="true">›</span></a></div>
+            </div>
+        </aside>
+        <button class="sidebar-scrim" id="sidebarScrim" type="button" aria-label="Close navigation"></button>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left">
+                    <button class="icon-button sidebar-toggle" id="sidebarToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                    </button>
+                    <div class="breadcrumb"><span>Operations</span><span class="breadcrumb-divider">/</span><strong>Purchases</strong></div>
+                </div>
+                <div class="topbar-actions">
+                    <button class="icon-button notification-button" id="notificationButton" type="button" aria-label="Notifications" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="notification-dot"></span></button>
+                    <a class="topbar-avatar" href="/profile/" aria-label="Your profile">BC</a>
+                    <div class="notification-popover" id="notificationPopover" role="status" hidden><strong>You're all caught up</strong><span>No new notifications right now.</span></div>
+                </div>
+            </header>
+
+            <div class="page-content purchases-content">
+                <section class="page-heading purchases-heading">
+                    <div><p class="date-label">SUPPLIER ORDERS</p><h1>Purchases</h1><p class="page-subtitle">Track purchase orders, supplier costs, and delivery status.</p></div>
+                    <button class="primary-button" id="newPurchaseButton" type="button"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12m6-6H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> New purchase</button>
+                </section>
+
+                <section class="purchase-stats" aria-label="Purchase summary">
+                    <article class="purchase-stat-card"><span class="purchase-stat-icon purchase-value-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M14.8 9.2c-.5-.8-1.4-1.2-2.8-1.2-1.5 0-2.5.7-2.5 1.7 0 2.6 5.1 1.2 5.1 4 0 1.2-1 2-2.7 2-1.4 0-2.5-.5-3.1-1.5M12 6.5v11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span><small>Purchase value</small><strong id="purchaseValue">₹0.00</strong><small class="purchase-stat-caption">all orders</small></span></article>
+                    <article class="purchase-stat-card"><span class="purchase-stat-icon purchase-pending-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><small>Pending orders</small><strong id="pendingPurchases">0</strong><small class="purchase-stat-caption">draft or ordered</small></span></article>
+                    <article class="purchase-stat-card"><span class="purchase-stat-icon purchase-received-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4.3 4.3L19 6.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg></span><span><small>Received this month</small><strong id="receivedPurchases">0</strong><small class="purchase-stat-caption">purchase orders</small></span></article>
+                    <article class="purchase-stat-card"><span class="purchase-stat-icon purchase-suppliers-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M16 5.2a3.2 3.2 0 0 1 0 6.2m1 2.8a4.5 4.5 0 0 1 3.5 4.4V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span><small>Suppliers</small><strong id="purchaseSuppliers">0</strong><small class="purchase-stat-caption">in purchase history</small></span></article>
+                </section>
+
+                <section class="purchase-panel" aria-label="Purchase orders">
+                    <div class="purchase-toolbar">
+                        <div><h2>Purchase orders</h2><p>Manage supplier orders and follow their progress.</p></div>
+                        <div class="purchase-filters">
+                            <label class="purchase-search"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="purchaseSearch" type="search" placeholder="Search reference or supplier..." aria-label="Search purchases"></label>
+                            <label class="purchase-status-filter"><span class="visually-hidden">Filter purchase status</span><select id="purchaseStatusFilter"><option value="">All statuses</option><option value="Draft">Draft</option><option value="Ordered">Ordered</option><option value="Received">Received</option><option value="Cancelled">Cancelled</option></select><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></label>
+                        </div>
+                    </div>
+                    <p class="purchase-storage-warning" id="purchaseStorageWarning" role="alert" hidden></p>
+                    <p class="purchase-feedback{% if server_error %} is-visible is-error{% endif %}" id="purchaseFeedback" role="status" aria-live="polite">{{ server_error }}</p>
+                    <div class="purchase-table-wrap">
+                        <table class="purchase-table">
+                            <thead><tr><th scope="col">PURCHASE ORDER</th><th scope="col">SUPPLIER</th><th scope="col">ORDER DATE</th><th scope="col">ITEMS</th><th scope="col">TOTAL</th><th scope="col">STATUS</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+                            <tbody id="purchaseRows"></tbody>
+                        </table>
+                        <div class="purchase-empty" id="purchaseEmpty" hidden><strong>No purchase orders found</strong><span>Try a different search or create a new purchase order.</span></div>
+                    </div>
+                    <div class="purchase-table-footer"><span id="purchaseResults">Showing purchases</span><span>Workspace purchase data</span></div>
+                </section>
+                <aside class="purchase-stock-note"><span class="purchase-note-icon" aria-hidden="true">i</span><p><strong>When an order arrives</strong> Mark it received here, then record the physical quantities on <a href="/stock/in/">Stock In</a> to update available inventory.</p></aside>
+                <footer class="page-footer">SmartStock AI <span>·</span> Purchase management</footer>
+            </div>
+        </main>
+    </div>
+    <button class="sidebar-scrim" id="sidebarScrim" type="button" aria-label="Close navigation"></button>
+
+    <dialog class="purchase-dialog" id="purchaseDialog" aria-labelledby="purchaseDialogTitle">
+        <form class="purchase-dialog-form" id="purchaseForm" method="{% if demo %}dialog{% else %}post{% endif %}" action="/purchases/" data-demo="{{ demo|yesno:'true,false' }}" novalidate>
+            {% csrf_token %}
+            <div class="purchase-dialog-heading">
+                <span class="purchase-dialog-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h2l2.2 10.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 9H7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.5" cy="20" r="1" fill="currentColor"/><circle cx="17.5" cy="20" r="1" fill="currentColor"/></svg></span>
+                <span><h2 id="purchaseDialogTitle">New purchase order</h2><p>Create a supplier order for incoming products.</p></span>
+                <button class="purchase-dialog-close" id="closePurchaseDialog" type="button" aria-label="Close dialog">×</button>
+            </div>
+            <div class="purchase-dialog-fields">
+                <div class="purchase-dialog-field"><label for="purchaseReference">Purchase order #</label><input id="purchaseReference" name="reference" type="text" maxlength="40" required></div>
+                <div class="purchase-dialog-field"><label for="purchaseSupplier">Supplier <span>*</span></label><select id="purchaseSupplier" name="supplier" required><option value="">Choose a supplier</option></select></div>
+                <div class="purchase-dialog-field"><label for="purchaseOrderDate">Order date <span>*</span></label><input id="purchaseOrderDate" name="order_date" type="date" required></div>
+                <div class="purchase-dialog-field"><label for="purchaseExpectedDate">Expected delivery <span class="optional-label">Optional</span></label><input id="purchaseExpectedDate" name="expected_date" type="date"></div>
+            </div>
+            <div class="purchase-line-heading"><div><strong>Order items</strong><small>Add at least one product to this order.</small></div><button class="purchase-add-line" id="addPurchaseLine" type="button"><span aria-hidden="true">+</span> Add item</button></div>
+            <div class="purchase-lines-wrap"><table class="purchase-lines-table"><thead><tr><th scope="col">PRODUCT</th><th scope="col">QTY</th><th scope="col">UNIT COST</th><th scope="col">TOTAL</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody id="purchaseLines"></tbody></table></div>
+            <div class="purchase-dialog-total"><span>Order total</span><strong id="purchaseDialogTotal">₹0.00</strong></div>
+            <div class="purchase-dialog-field purchase-notes-field"><label for="purchaseNotes">Notes <span class="optional-label">Optional</span></label><textarea id="purchaseNotes" name="notes" rows="2" maxlength="240" placeholder="Add delivery or order details..."></textarea></div>
+            <p class="purchase-dialog-message" id="purchaseDialogMessage" role="status" aria-live="polite"></p>
+            <div class="purchase-dialog-actions"><button class="purchase-cancel-button" id="cancelPurchaseDialog" type="button">Cancel</button><button class="purchase-submit-button" type="submit">Create purchase order</button></div>
+        </form>
+    </dialog>
+
+    <dialog class="purchase-detail-dialog" id="purchaseDetailDialog" aria-labelledby="detailPurchaseTitle">
+        <div class="purchase-detail-content">
+            <div class="purchase-dialog-heading">
+                <span class="purchase-dialog-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5zM8 9h8M8 12h8M8 15h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span><h2 id="detailPurchaseTitle">Purchase details</h2><p id="detailPurchaseSubtitle"></p></span>
+                <button class="purchase-dialog-close" id="closePurchaseDetails" type="button" aria-label="Close dialog">×</button>
+            </div>
+            <div id="purchaseDetailBody" class="purchase-detail-body"></div>
+            <div class="purchase-dialog-actions"><button class="purchase-cancel-button" id="closePurchaseDetailsFooter" type="button">Close</button><button class="purchase-cancel-button" id="purchaseCancelAction" type="button" hidden>Cancel order</button><button class="purchase-submit-button" id="purchaseStatusAction" type="button" hidden></button></div>
+        </div>
+    </dialog>
+    {{ purchase_data|json_script:"purchaseData" }}
+    {{ product_data|json_script:"purchaseProducts" }}
+    {{ suppliers|json_script:"purchaseSupplierData" }}
+    <script src="/static/js/purchases.js" defer></script>
+</body>
+</html>

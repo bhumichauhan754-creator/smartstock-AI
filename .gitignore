@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.pyo
+.env
+.pytest_cache/
+.mypy_cache/
+.vscode/
+*.log
+dist/
+build/
+*.egg-info/
+/django_backend/db.sqlite3
+/django_backend/media/
+/django_backend/staticfiles/

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f8fc">
+    <title>Sales | SmartStock AI</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <link rel="stylesheet" href="/static/css/sales.css">
+</head>
+<body data-demo="{{ demo|yesno:'true,false' }}">
+    <div class="dashboard-shell">
+        <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+            <a class="brand" href="/dashboard/" aria-label="SmartStock AI dashboard"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M5 10.5 16 5l11 5.5v11L16 27 5 21.5v-11Z" stroke="currentColor" stroke-width="2"/><path d="m5.5 10.8 10.5 5.4 10.5-5.4M16 16.5V27" stroke="currentColor" stroke-width="2"/><path d="m11 7.6 11 5.6" stroke="currentColor" stroke-width="2"/></svg></span><span>SmartStock <span class="brand-light">AI</span></span></a>
+            <div class="workspace-switcher"><span class="workspace-avatar">A</span><span class="workspace-copy"><strong>Acme Workspace</strong><small>Inventory team</small></span><svg class="workspace-chevron" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <nav class="side-nav">
+                <span class="nav-caption">WORKSPACE</span>
+                <a class="nav-link" href="/dashboard/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3.5" width="7" height="4" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="10.5" width="7" height="10" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Dashboard</span></a>
+                <a class="nav-link" href="/products/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m12 3 8.5 4.5v9L12 21l-8.5-4.5v-9L12 3Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="m3.8 7.7 8.2 4.5 8.2-4.5M12 12.2V21" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><span>Products</span></a>
+                <a class="nav-link" href="/categories/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.7"/></svg><span>Categories</span></a>
+                <span class="nav-caption nav-caption-spaced">OPERATIONS</span>
+                <a class="nav-link" href="/stock/in/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14.5v4A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stock In</span></a>
+                <a class="nav-link" href="/stock/out/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 4v12m0 0 4.5-4.5M12 16l-4.5-4.5M5 18v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Stock Out</span></a>
+                <a class="nav-link" href="/purchases/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 5h2l2.2 10.1a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L21 9H7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10.5" cy="20" r="1" fill="currentColor"/><circle cx="17.5" cy="20" r="1" fill="currentColor"/></svg><span>Purchases</span></a>
+                <a class="nav-link active" href="/sales/" aria-current="page"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 19V5m0 14h16M8 15l4-4 3 2 5-6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 7H20v3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Sales</span></a>
+                <span class="nav-caption nav-caption-spaced">DIRECTORY</span>
+                <a class="nav-link" href="/suppliers/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M16 5.2a3.2 3.2 0 0 1 0 6.2m1 2.8a4.5 4.5 0 0 1 3.5 4.4V20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Suppliers</span></a>
+                <a class="nav-link" href="/customers/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M17 8h4m-2-2v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Customers</span></a>
+                <a class="nav-link" href="/reports/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 3.5h8l4 4V20a.5.5 0 0 1-.5.5h-11A.5.5 0 0 1 6 20V3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3.5v4h4M9 12h6m-6 3.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg><span>Reports</span></a>
+                <a class="nav-link" href="/audit/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Audit History</span></a>
+            </nav>
+            <div class="sidebar-bottom"><a class="nav-link" href="/settings/"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.7"/><path d="m19.4 15 .1.1a1.8 1.8 0 1 1-2.5 2.5l-.1-.1a1.8 1.8 0 0 0-3 .9v.2a1.8 1.8 0 1 1-3.6 0v-.2a1.8 1.8 0 0 0-3-.9l-.1.1a1.8 1.8 0 1 1-2.5-2.5l.1-.1a1.8 1.8 0 0 0-.9-3h-.2a1.8 1.8 0 1 1 0-3.6h.2a1.8 1.8 0 0 0 .9-3l-.1-.1a1.8 1.8 0 1 1 2.5-2.5l.1.1a1.8 1.8 0 0 0 3-.9v-.2a1.8 1.8 0 1 1 3.6 0v.2a1.8 1.8 0 0 0 3 .9l.1-.1a1.8 1.8 0 1 1 2.5 2.5l.1.1a1.8 1.8 0 0 0 .9 3h.2a1.8 1.8 0 1 1 0 3.6h-.2a1.8 1.8 0 0 0-.9 3Z" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg><span>Settings</span></a><div class="sidebar-user"><span class="user-avatar">BC</span><span class="user-copy"><strong>Bhumi Chauhan</strong><small>Administrator</small></span><a class="user-menu-link" href="/profile/" aria-label="Open user profile"><span aria-hidden="true">›</span></a></div></div>
+        </aside>
+        <button class="sidebar-scrim" id="sidebarScrim" type="button" aria-label="Close navigation"></button>
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-left"><button class="icon-button sidebar-toggle" id="sidebarToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button><div class="breadcrumb"><span>Operations</span><span class="breadcrumb-divider">/</span><strong>Sales</strong></div></div>
+                <div class="topbar-actions"><button class="icon-button notification-button" id="notificationButton" type="button" aria-label="Notifications" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 9a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="notification-dot"></span></button><a class="topbar-avatar" href="/profile/" aria-label="Your profile">BC</a><div class="notification-popover" id="notificationPopover" role="status" hidden><strong>You're all caught up</strong><span>No new notifications right now.</span></div></div>
+            </header>
+
+            <div class="page-content sales-content">
+                <section class="page-heading sales-heading"><div><p class="date-label">CUSTOMER ORDERS</p><h1>Sales</h1><p class="page-subtitle">Create customer invoices and track payment status.</p></div><button class="primary-button" id="newSaleButton" type="button"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12m6-6H4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg> New sale</button></section>
+
+                <section class="sales-stats" aria-label="Sales summary">
+                    <article class="sales-stat-card"><span class="sales-stat-icon sales-revenue-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M14.8 9.2c-.5-.8-1.4-1.2-2.8-1.2-1.5 0-2.5.7-2.5 1.7 0 2.6 5.1 1.2 5.1 4 0 1.2-1 2-2.7 2-1.4 0-2.5-.5-3.1-1.5M12 6.5v11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span><span><small>Sales value</small><strong id="salesValue">₹0.00</strong><small class="sales-stat-caption">paid and pending</small></span></article>
+                    <article class="sales-stat-card"><span class="sales-stat-icon sales-pending-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span><small>Pending payment</small><strong id="pendingSales">₹0.00</strong><small class="sales-stat-caption">invoices outstanding</small></span></article>
+                    <article class="sales-stat-card"><span class="sales-stat-icon sales-paid-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="m5 12 4.3 4.3L19 6.8" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg></span><span><small>Paid this month</small><strong id="paidSales">₹0.00</strong><small class="sales-stat-caption">collected revenue</small></span></article>
+                    <article class="sales-stat-card"><span class="sales-stat-icon sales-customers-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3.2" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 20v-1.5A4.5 4.5 0 0 1 8 14h2a4.5 4.5 0 0 1 4.5 4.5V20M17 8h4m-2-2v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span><small>Customers</small><strong id="salesCustomers">0</strong><small class="sales-stat-caption">in sales history</small></span></article>
+                </section>
+
+                <section class="sales-panel" aria-label="Sales invoices">
+                    <div class="sales-toolbar"><div><h2>Sales invoices</h2><p>Review customer transactions and manage invoice payments.</p></div><div class="sales-filters"><label class="sales-search"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.5"/><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><input id="salesSearch" type="search" placeholder="Search invoice or customer..." aria-label="Search sales"></label><label class="sales-status-filter"><span class="visually-hidden">Filter payment status</span><select id="salesStatusFilter"><option value="">All statuses</option><option value="Pending">Pending</option><option value="Paid">Paid</option><option value="Cancelled">Cancelled</option></select><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m6 8 4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></label></div></div>
+                    <p class="sales-storage-warning" id="salesStorageWarning" role="alert" hidden></p>
+                    <p class="sales-feedback{% if server_error %} is-visible is-error{% endif %}" id="salesFeedback" role="status" aria-live="polite">{{ server_error }}</p>
+                    <div class="sales-table-wrap"><table class="sales-table"><thead><tr><th scope="col">INVOICE</th><th scope="col">CUSTOMER</th><th scope="col">SALE DATE</th><th scope="col">ITEMS</th><th scope="col">TOTAL</th><th scope="col">PAYMENT</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody id="salesRows"></tbody></table><div class="sales-empty" id="salesEmpty" hidden><strong>No sales found</strong><span>Try a different search or create a new sale.</span></div></div>
+                    <div class="sales-table-footer"><span id="salesResults">Showing sales</span><span>Workspace invoice data</span></div>
+                </section>
+                <aside class="sales-stock-note"><span class="sales-note-icon" aria-hidden="true">i</span><p><strong>When items are dispatched</strong> Record the physical inventory leaving through <a href="/stock/out/">Stock Out</a> so available quantities stay accurate.</p></aside>
+                <footer class="page-footer">SmartStock AI <span>·</span> Sales management</footer>
+            </div>
+        </main>
+    </div>
+
+    <dialog class="sales-dialog" id="saleDialog" aria-labelledby="saleDialogTitle">
+        <form class="sales-dialog-form" id="saleForm" method="{% if demo %}dialog{% else %}post{% endif %}" action="/sales/" data-demo="{{ demo|yesno:'true,false' }}" novalidate>
+            {% csrf_token %}
+            <div class="sales-dialog-heading"><span class="sales-dialog-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3.5h8l4 4V20a.5.5 0 0 1-.5.5h-11A.5.5 0 0 1 6 20V3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3.5v4h4M9 12h6m-6 3.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span><h2 id="saleDialogTitle">New sales invoice</h2><p>Create a customer sale and record its payment status.</p></span><button class="sales-dialog-close" id="closeSaleDialog" type="button" aria-label="Close dialog">×</button></div>
+            <div class="sales-dialog-fields">
+                <div class="sales-dialog-field"><label for="saleReference">Invoice number</label><input id="saleReference" name="reference" type="text" maxlength="40" required></div>
+                <div class="sales-dialog-field"><label for="saleCustomer">Customer <span>*</span></label><select id="saleCustomer" name="customer" required><option value="">Choose a customer</option></select></div>
+                <div class="sales-dialog-field"><label for="saleDate">Sale date <span>*</span></label><input id="saleDate" name="sale_date" type="date" required></div>
+                <div class="sales-dialog-field"><label for="salePaymentStatus">Payment status <span>*</span></label><select id="salePaymentStatus" name="payment_status" required><option value="Pending">Pending</option><option value="Paid">Paid</option></select></div>
+            </div>
+            <div class="sale-line-heading"><div><strong>Invoice items</strong><small>Add at least one product to this sale.</small></div><button class="sale-add-line" id="addSaleLine" type="button"><span aria-hidden="true">+</span> Add item</button></div>
+            <div class="sale-lines-wrap"><table class="sale-lines-table"><thead><tr><th scope="col">PRODUCT</th><th scope="col">QTY</th><th scope="col">UNIT PRICE</th><th scope="col">TOTAL</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead><tbody id="saleLines"></tbody></table></div>
+            <div class="sale-dialog-total"><span>Invoice total</span><strong id="saleDialogTotal">₹0.00</strong></div>
+            <div class="sales-dialog-field sale-notes-field"><label for="saleNotes">Notes <span class="sales-optional-label">Optional</span></label><textarea id="saleNotes" name="notes" rows="2" maxlength="240" placeholder="Add delivery or invoice details..."></textarea></div>
+            <p class="sale-dialog-message" id="saleDialogMessage" role="status" aria-live="polite"></p>
+            <div class="sale-dialog-actions"><button class="sale-cancel-button" id="cancelSaleDialog" type="button">Cancel</button><button class="sale-submit-button" type="submit">Create invoice</button></div>
+        </form>
+    </dialog>
+
+    <dialog class="sale-detail-dialog" id="saleDetailDialog" aria-labelledby="detailSaleTitle">
+        <div class="sale-detail-content">
+            <div class="sales-dialog-heading"><span class="sales-dialog-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M6 3.5h8l4 4V20a.5.5 0 0 1-.5.5h-11A.5.5 0 0 1 6 20V3.5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M14 3.5v4h4M9 12h6m-6 3.5h6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></span><span><h2 id="detailSaleTitle">Invoice details</h2><p id="detailSaleSubtitle"></p></span><button class="sales-dialog-close" id="closeSaleDetails" type="button" aria-label="Close dialog">×</button></div>
+            <div id="saleDetailBody" class="sale-detail-body"></div>
+            <div class="sale-dialog-actions"><button class="sale-cancel-button" id="closeSaleDetailsFooter" type="button">Close</button><button class="sale-cancel-button" id="cancelSaleAction" type="button" hidden>Cancel invoice</button><button class="sale-submit-button" id="saleStatusAction" type="button" hidden></button></div>
+        </div>
+    </dialog>
+    {{ sales_data|json_script:"salesData" }}
+    {{ product_data|json_script:"salesProducts" }}
+    {{ customers|json_script:"salesCustomerOptions" }}
+    <script src="/static/js/sales.js" defer></script>
+</body>
+</html>
