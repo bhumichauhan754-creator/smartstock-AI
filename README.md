@@ -1,0 +1,2 @@
+# smartstock-AI
+AI project
